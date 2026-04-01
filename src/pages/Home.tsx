@@ -263,11 +263,14 @@ export function HomePage() {
         </section>
       )}
 
-      {/* ── Philosophy strip ──────────────────────────────────── */}
-      <section className="relative py-24 overflow-hidden bg-[#06090c]">
+      {/* ── Philosophy strip — blends into footer ─────────────── */}
+      <section className="relative pt-24 pb-32 overflow-hidden bg-[#06090c]">
         <div className="absolute inset-0 bg-[#1a4d33]/20" />
         <div className="absolute inset-0 opacity-10"
           style={{ background: 'radial-gradient(ellipse 60% 80% at 50% 50%, #d4952a33, transparent)' }} />
+        {/* Bottom fade — dissolves into footer so no hard edge */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
+          style={{ background: 'linear-gradient(to bottom, transparent, #06090c)' }} />
         <div className="relative max-w-3xl mx-auto px-6 text-center">
           <p className="text-[10px] font-body tracking-[0.35em] uppercase text-[#d4952a] mb-4">Our Philosophy</p>
           <h2 className="font-display text-4xl md:text-5xl font-light text-[#f0ebe0] mb-6 leading-tight">
