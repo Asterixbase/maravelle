@@ -6,10 +6,22 @@ import { useFeaturedProducts, useTrendingProducts, useNewArrivals } from '@/api/
 import { useFeaturedBrands } from '@/api/brands'
 
 const HERO_CATEGORIES = [
-  { label: 'Women',   to: '/women',    gradient: 'from-[#1a0a00] via-[#3d1f00] to-[#1a4d33]', accent: '#d4952a' },
-  { label: 'Men',     to: '/men',      gradient: 'from-[#06090c] via-[#0d1117] to-[#1a2040]', accent: '#9ca3af' },
-  { label: 'Beauty',  to: '/beauty',   gradient: 'from-[#1a0010] via-[#3d0025] to-[#1a4d33]', accent: '#e8b84b' },
-  { label: 'Home',    to: '/homeware', gradient: 'from-[#06090c] via-[#1a4d33] to-[#0d2818]', accent: '#d4952a' },
+  {
+    label: 'Women', to: '/women', accent: '#d4952a',
+    image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=600&h=600&fit=crop&q=80',
+  },
+  {
+    label: 'Men', to: '/men', accent: '#9ca3af',
+    image: 'https://images.unsplash.com/photo-1617137968427-85924c800a22?w=600&h=600&fit=crop&q=80',
+  },
+  {
+    label: 'Beauty', to: '/beauty', accent: '#e8b84b',
+    image: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&h=600&fit=crop&q=80',
+  },
+  {
+    label: 'Home', to: '/homeware', accent: '#d4952a',
+    image: 'https://images.unsplash.com/photo-1615529182904-14819c35db37?w=600&h=600&fit=crop&q=80',
+  },
 ]
 
 const BRAND_NAMES = [
@@ -64,14 +76,23 @@ export function HomePage() {
       <section className="bg-[#06090c] py-12">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {HERO_CATEGORIES.map(({ label, to, gradient, accent }) => (
+            {HERO_CATEGORIES.map(({ label, to, accent, image }) => (
               <Link key={to} to={to} className="group relative aspect-square overflow-hidden rounded-sm">
-                <div className={`absolute inset-0 bg-gradient-to-br ${gradient} transition-transform duration-700 group-hover:scale-105`} />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full opacity-10 group-hover:opacity-25 transition-opacity duration-500"
-                  style={{ background: `radial-gradient(circle, ${accent}, transparent)` }} />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#06090c]/80 to-transparent" />
+                {/* Photo */}
+                <img
+                  src={image}
+                  alt={label}
+                  loading="lazy"
+                  decoding="async"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                {/* Dark gradient overlay so text stays readable */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
+                {/* Subtle accent glow */}
+                <div className="absolute bottom-0 left-0 right-0 h-1/2 opacity-0 group-hover:opacity-30 transition-opacity duration-500"
+                  style={{ background: `radial-gradient(ellipse at 50% 100%, ${accent}, transparent 70%)` }} />
                 <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
-                  <span className="font-display text-xl text-[#f0ebe0]">{label}</span>
+                  <span className="font-display text-xl text-white drop-shadow">{label}</span>
                   <ChevronRight className="h-4 w-4 text-[#d4952a] group-hover:translate-x-1 transition-transform" />
                 </div>
               </Link>
