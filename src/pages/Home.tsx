@@ -132,8 +132,8 @@ export function HomePage() {
 
       {/* ── Category tiles ────────────────────────────────────── */}
       <section className="bg-[#06090c] py-12">
-        <div className="w-full px-8 md:px-14 lg:px-20">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div className="w-full px-8 md:px-16 lg:px-24 xl:px-36">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {HERO_CATEGORIES.map(({ label, to, accent, image }) => (
               <Link key={to} to={to} className="group relative aspect-square overflow-hidden rounded-sm">
                 {/* Photo */}
@@ -271,12 +271,12 @@ export function HomePage() {
         {/* Bottom fade — dissolves into footer so no hard edge */}
         <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
           style={{ background: 'linear-gradient(to bottom, transparent, #06090c)' }} />
-        <div className="relative w-full px-8 md:px-14 lg:px-20 text-center">
+        <div className="relative w-full px-8 md:px-24 lg:px-48 xl:px-64 text-center">
           <p className="text-[10px] font-body tracking-[0.35em] uppercase text-[#d4952a] mb-4">Our Philosophy</p>
           <h2 className="font-display text-4xl md:text-5xl font-light text-[#f0ebe0] mb-6 leading-tight">
             Quality over quantity.<br />Always.
           </h2>
-          <p className="text-base text-[#9ca3af] font-body leading-relaxed mb-8 max-w-xl mx-auto">
+          <p className="text-base text-[#9ca3af] font-body leading-relaxed mb-8">
             Maravelle doesn't list everything — we list what's worth owning. Every product is
             reviewed by our editors for quality, craftsmanship, and lasting value. No fast
             fashion. No compromise.
