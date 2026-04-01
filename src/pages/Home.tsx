@@ -4,14 +4,35 @@ import { Button } from '@/components/ui/button'
 import { ProductCard } from '@/components/product/ProductCard'
 import { useFeaturedProducts, useTrendingProducts, useNewArrivals } from '@/api/products'
 import { useFeaturedBrands } from '@/api/brands'
-import { cloudinaryUrl } from '@/lib/utils'
 
 const HERO_CATEGORIES = [
-  { label: 'Women', to: '/women', image: 'maravelle/hero-women' },
-  { label: 'Men', to: '/men', image: 'maravelle/hero-men' },
-  { label: 'Beauty', to: '/beauty', image: 'maravelle/hero-beauty' },
-  { label: 'Home', to: '/homeware', image: 'maravelle/hero-home' },
+  {
+    label: 'Women',
+    to: '/women',
+    gradient: 'from-[#1a0a00] via-[#3d1f00] to-[#1a4d33]',
+    accent: '#d4952a',
+  },
+  {
+    label: 'Men',
+    to: '/men',
+    gradient: 'from-[#06090c] via-[#0d1117] to-[#1a2040]',
+    accent: '#9ca3af',
+  },
+  {
+    label: 'Beauty',
+    to: '/beauty',
+    gradient: 'from-[#1a0010] via-[#3d0025] to-[#1a4d33]',
+    accent: '#e8b84b',
+  },
+  {
+    label: 'Home',
+    to: '/homeware',
+    gradient: 'from-[#06090c] via-[#1a4d33] to-[#0d2818]',
+    accent: '#d4952a',
+  },
 ]
+
+const BRAND_NAMES = ['John Lewis', 'Marks & Spencer', 'Harrods', 'Fenwick']
 
 export function HomePage() {
   const { data: featured } = useFeaturedProducts(8)
@@ -24,12 +45,16 @@ export function HomePage() {
 
       {/* ── Hero ──────────────────────────────────────────────── */}
       <section className="relative h-[85vh] min-h-[600px] flex items-end overflow-hidden">
-        <img
-          src="/hero-main.jpg"
-          alt="Maravelle — Curated British Luxury"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#06090c] via-[#06090c]/40 to-transparent" />
+        {/* Gradient hero background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#06090c] via-[#0d1a0d] to-[#1a1200]" />
+        {/* Decorative gold shimmer */}
+        <div className="absolute inset-0 opacity-20"
+          style={{ background: 'radial-gradient(ellipse 80% 60% at 60% 40%, #d4952a22 0%, transparent 70%)' }} />
+        {/* Subtle grid texture */}
+        <div className="absolute inset-0 opacity-5"
+          style={{ backgroundImage: 'linear-gradient(#d4952a 1px, transparent 1px), linear-gradient(90deg, #d4952a 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#06090c] via-transparent to-transparent" />
+
         <div className="relative max-w-7xl mx-auto px-4 pb-20 w-full">
           <p className="text-xs font-body tracking-[0.3em] uppercase text-[#d4952a] mb-4">
             New Season · Spring 2025
@@ -55,18 +80,16 @@ export function HomePage() {
       {/* ── Category tiles ────────────────────────────────────── */}
       <section className="max-w-7xl mx-auto px-4 py-16">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {HERO_CATEGORIES.map(({ label, to, image }) => (
+          {HERO_CATEGORIES.map(({ label, to, gradient, accent }) => (
             <Link
               key={to}
               to={to}
               className="group relative aspect-square overflow-hidden rounded-sm"
             >
-              <img
-                src={cloudinaryUrl(image, { width: 400, height: 400 })}
-                alt={label}
-                loading="lazy"
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-              />
+              <div className={`absolute inset-0 bg-gradient-to-br ${gradient} transition-transform duration-500 group-hover:scale-105`} />
+              {/* Decorative circle */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full opacity-10 transition-opacity duration-300 group-hover:opacity-20"
+                style={{ background: `radial-gradient(circle, ${accent}, transparent)` }} />
               <div className="absolute inset-0 bg-gradient-to-t from-[#06090c]/80 to-transparent" />
               <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
                 <span className="font-display text-xl text-[#f0ebe0]">{label}</span>
@@ -78,59 +101,60 @@ export function HomePage() {
       </section>
 
       {/* ── Featured brands ───────────────────────────────────── */}
-      {brands && brands.length > 0 && (
-        <section className="border-y border-white/5 py-10">
-          <div className="max-w-7xl mx-auto px-4">
-            <p className="text-xs font-body tracking-[0.3em] uppercase text-[#6b7280] text-center mb-8">
-              As featured from
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16">
-              {brands.map((brand) => (
-                <Link
-                  key={brand.id}
-                  to={`/brands/${brand.slug}`}
-                  className="opacity-50 hover:opacity-100 transition-opacity"
-                >
-                  {brand.logoUrl ? (
-                    <img
-                      src={cloudinaryUrl(brand.logoUrl, { width: 120, height: 40 })}
-                      alt={brand.name}
-                      className="h-8 w-auto object-contain filter invert"
-                    />
-                  ) : (
-                    <span className="font-display text-lg text-[#f0ebe0]">{brand.name}</span>
-                  )}
-                </Link>
-              ))}
-            </div>
+      <section className="border-y border-white/5 py-10">
+        <div className="max-w-7xl mx-auto px-4">
+          <p className="text-xs font-body tracking-[0.3em] uppercase text-[#6b7280] text-center mb-8">
+            As featured from
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16">
+            {(brands?.length ? brands.map(b => b.name) : BRAND_NAMES).map((name) => (
+              <Link
+                key={name}
+                to={`/brands/${name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
+                className="opacity-40 hover:opacity-100 transition-opacity"
+              >
+                <span className="font-display text-xl md:text-2xl text-[#f0ebe0] tracking-widest">
+                  {name}
+                </span>
+              </Link>
+            ))}
           </div>
-        </section>
-      )}
+        </div>
+      </section>
 
       {/* ── Editor's Picks ────────────────────────────────────── */}
-      {featured && featured.length > 0 && (
+      {featured && featured.length > 0 ? (
         <section className="max-w-7xl mx-auto px-4 py-16">
           <div className="flex items-end justify-between mb-8">
             <div>
-              <p className="text-xs font-body tracking-[0.3em] uppercase text-[#d4952a] mb-2">
-                Handpicked
-              </p>
-              <h2 className="font-display text-3xl md:text-4xl font-light text-[#f0ebe0]">
-                Editor's Picks
-              </h2>
+              <p className="text-xs font-body tracking-[0.3em] uppercase text-[#d4952a] mb-2">Handpicked</p>
+              <h2 className="font-display text-3xl md:text-4xl font-light text-[#f0ebe0]">Editor's Picks</h2>
             </div>
-            <Link
-              to="/edit/editors-picks"
-              className="hidden md:flex items-center gap-1 text-xs font-body tracking-widest uppercase text-[#9ca3af] hover:text-[#d4952a] transition-colors"
-            >
+            <Link to="/edit/editors-picks" className="hidden md:flex items-center gap-1 text-xs font-body tracking-widest uppercase text-[#9ca3af] hover:text-[#d4952a] transition-colors">
               View All <ArrowRight className="h-3 w-3" />
             </Link>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {featured.map((product) => (
-              <ProductCard key={product.id} product={product} />
+            {featured.map((product) => <ProductCard key={product.id} product={product} />)}
+          </div>
+        </section>
+      ) : (
+        /* Coming soon placeholder when no products yet */
+        <section className="max-w-7xl mx-auto px-4 py-16">
+          <div className="flex items-end justify-between mb-8">
+            <div>
+              <p className="text-xs font-body tracking-[0.3em] uppercase text-[#d4952a] mb-2">Handpicked</p>
+              <h2 className="font-display text-3xl md:text-4xl font-light text-[#f0ebe0]">Editor's Picks</h2>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {Array.from({ length: 8 }).map((_, i) => (
+              <div key={i} className="aspect-[3/4] bg-[#0d1117] border border-white/5 rounded-sm animate-pulse" />
             ))}
           </div>
+          <p className="text-center text-xs text-[#6b7280] font-body mt-6 tracking-wider">
+            Products coming soon — we're curating the best of British luxury
+          </p>
         </section>
       )}
 
@@ -140,24 +164,15 @@ export function HomePage() {
           <div className="max-w-7xl mx-auto px-4">
             <div className="flex items-end justify-between mb-8">
               <div>
-                <p className="text-xs font-body tracking-[0.3em] uppercase text-[#d4952a] mb-2">
-                  Just Landed
-                </p>
-                <h2 className="font-display text-3xl md:text-4xl font-light text-[#f0ebe0]">
-                  New Arrivals
-                </h2>
+                <p className="text-xs font-body tracking-[0.3em] uppercase text-[#d4952a] mb-2">Just Landed</p>
+                <h2 className="font-display text-3xl md:text-4xl font-light text-[#f0ebe0]">New Arrivals</h2>
               </div>
-              <Link
-                to="/new-in"
-                className="hidden md:flex items-center gap-1 text-xs font-body tracking-widest uppercase text-[#9ca3af] hover:text-[#d4952a] transition-colors"
-              >
+              <Link to="/new-in" className="hidden md:flex items-center gap-1 text-xs font-body tracking-widest uppercase text-[#9ca3af] hover:text-[#d4952a] transition-colors">
                 See All <ArrowRight className="h-3 w-3" />
               </Link>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {newArrivals.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
+              {newArrivals.map((product) => <ProductCard key={product.id} product={product} />)}
             </div>
           </div>
         </section>
@@ -168,18 +183,12 @@ export function HomePage() {
         <section className="max-w-7xl mx-auto px-4 py-16">
           <div className="flex items-end justify-between mb-8">
             <div>
-              <p className="text-xs font-body tracking-[0.3em] uppercase text-[#d4952a] mb-2">
-                Most Wanted
-              </p>
-              <h2 className="font-display text-3xl md:text-4xl font-light text-[#f0ebe0]">
-                Trending Now
-              </h2>
+              <p className="text-xs font-body tracking-[0.3em] uppercase text-[#d4952a] mb-2">Most Wanted</p>
+              <h2 className="font-display text-3xl md:text-4xl font-light text-[#f0ebe0]">Trending Now</h2>
             </div>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {trending.slice(0, 8).map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
+            {trending.slice(0, 8).map((product) => <ProductCard key={product.id} product={product} />)}
           </div>
         </section>
       )}
@@ -187,10 +196,10 @@ export function HomePage() {
       {/* ── Brand story strip ─────────────────────────────────── */}
       <section className="relative py-24 overflow-hidden">
         <div className="absolute inset-0 bg-[#1a4d33]/20" />
+        <div className="absolute inset-0 opacity-10"
+          style={{ background: 'radial-gradient(ellipse 60% 80% at 50% 50%, #d4952a33, transparent)' }} />
         <div className="relative max-w-3xl mx-auto px-4 text-center">
-          <p className="text-xs font-body tracking-[0.3em] uppercase text-[#d4952a] mb-4">
-            Our Philosophy
-          </p>
+          <p className="text-xs font-body tracking-[0.3em] uppercase text-[#d4952a] mb-4">Our Philosophy</p>
           <h2 className="font-display text-4xl md:text-5xl font-light text-[#f0ebe0] mb-6 leading-tight">
             Quality over quantity.<br />Always.
           </h2>
