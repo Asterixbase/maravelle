@@ -104,20 +104,27 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* ── Featured brands ───────────────────────────────────── */}
-      <section className="border-y border-white/5 py-10">
-        <div className="max-w-7xl mx-auto px-4">
-          <p className="text-xs font-body tracking-[0.3em] uppercase text-[#6b7280] text-center mb-8">
-            As featured from
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16">
-            {(brands?.length ? brands.map(b => b.name) : BRAND_NAMES).map((name) => (
+      {/* ── Brand marquee ─────────────────────────────────────── */}
+      <section className="border-y border-white/5 py-8 overflow-hidden">
+        <p className="text-xs font-body tracking-[0.3em] uppercase text-[#6b7280] text-center mb-6">
+          As featured from
+        </p>
+        {/* Fade edges */}
+        <div className="relative">
+          <div className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
+            style={{ background: 'linear-gradient(to right, #06090c, transparent)' }} />
+          <div className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
+            style={{ background: 'linear-gradient(to left, #06090c, transparent)' }} />
+
+          {/* Scrolling track — duplicated for seamless loop */}
+          <div className="flex items-center" style={{ animation: 'marquee 30s linear infinite' }}>
+            {[...(brands?.length ? brands.map(b => b.name) : BRAND_NAMES), ...(brands?.length ? brands.map(b => b.name) : BRAND_NAMES)].map((name, i) => (
               <Link
-                key={name}
+                key={`${name}-${i}`}
                 to={`/brands/${name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
-                className="opacity-40 hover:opacity-100 transition-opacity"
+                className="flex-shrink-0 opacity-30 hover:opacity-100 transition-opacity duration-300 mx-10 md:mx-16"
               >
-                <span className="font-display text-xl md:text-2xl text-[#f0ebe0] tracking-widest">
+                <span className="font-display text-xl md:text-2xl text-[#f0ebe0] tracking-widest whitespace-nowrap">
                   {name}
                 </span>
               </Link>
