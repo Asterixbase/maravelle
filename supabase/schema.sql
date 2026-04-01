@@ -62,9 +62,7 @@ create table products (
   is_new_arrival   boolean not null default true,
   click_count      integer not null default 0,
   conversion_count integer not null default 0,
-  search_vector    tsvector generated always as (
-    to_tsvector('english', coalesce(name,'') || ' ' || coalesce(description,'') || ' ' || array_to_string(tags,' '))
-  ) stored,
+  search_vector    tsvector,
   created_at       timestamptz not null default now(),
   updated_at       timestamptz not null default now()
 );
@@ -186,6 +184,23 @@ create policy "editorial_public_read" on editorial_posts for select using (true)
 
 -- ── TRIGGERS ─────────────────────────────────────────────────────────────────
 
+-- Maintain search_vector on products
+create or replace function products_search_vector_update()
+returns trigger language plpgsql as $$
+begin
+  new.search_vector := to_tsvector('english',
+    coalesce(new.name, '') || ' ' ||
+    coalesce(new.description, '') || ' ' ||
+    array_to_string(new.tags, ' ')
+  );
+  return new;
+end;
+$$;
+
+create trigger products_search_vector_trigger
+  before insert or update on products
+  for each row execute procedure products_search_vector_update();
+
 -- Auto-create user_profile on sign-up
 create or replace function handle_new_user()
 returns trigger language plpgsql security definer as $$
@@ -234,5 +249,5 @@ create trigger on_affiliate_click
 insert into brands (slug, name, network, merchant_id, is_active, featured_rank, tagline) values
   ('john-lewis', 'John Lewis', 'awin', '1234', true, 1, 'Quality you can trust, style that endures'),
   ('marks-and-spencer', 'Marks & Spencer', 'awin', '5678', true, 2, 'The British icon of quality and style'),
-  ('harrods', 'Harrods', 'rakuten', '9012', true, 3, 'The world's most famous department store'),
+  ('harrods', 'Harrods', 'rakuten', '9012', true, 3, 'The world''s most famous department store'),
   ('fenwick', 'Fenwick', 'awin', '3456', true, 4, 'Luxury multi-brand retail at its finest');

@@ -11,25 +11,13 @@ interface AuthStore {
   signIn: (email: string) => Promise<void>
   signOut: () => Promise<void>
   setSession: (session: Session | null) => void
+  fetchProfile: (userId: string) => Promise<void>
 }
 
-export const useAuthStore = create<AuthStore>((set, get) => ({
+export const useAuthStore = create<AuthStore>((set) => ({
   session: null,
   profile: null,
   loading: true,
-
-  bootstrap: async () => {
-    const { data: { session } } = await supabase.auth.getSession()
-    set({ session })
-    if (session) await get().fetchProfile(session.user.id)
-    set({ loading: false })
-
-    supabase.auth.onAuthStateChange((_event, session) => {
-      set({ session })
-      if (session) get().fetchProfile(session.user.id)
-      else set({ profile: null })
-    })
-  },
 
   fetchProfile: async (userId: string) => {
     const { data } = await supabase
@@ -38,6 +26,26 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
       .eq('id', userId)
       .single()
     set({ profile: data as UserProfile | null })
+  },
+
+  bootstrap: async () => {
+    const { data: { session } } = await supabase.auth.getSession()
+    set({ session })
+    if (session) {
+      const { data } = await supabase.from('user_profiles').select('*').eq('id', session.user.id).single()
+      set({ profile: data as UserProfile | null })
+    }
+    set({ loading: false })
+
+    supabase.auth.onAuthStateChange(async (_event, session) => {
+      set({ session })
+      if (session) {
+        const { data } = await supabase.from('user_profiles').select('*').eq('id', session.user.id).single()
+        set({ profile: data as UserProfile | null })
+      } else {
+        set({ profile: null })
+      }
+    })
   },
 
   signIn: async (email: string) => {
@@ -54,10 +62,3 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
 
   setSession: (session) => set({ session }),
 }))
-
-// Augment type for internal use
-declare module '@/store/auth' {
-  interface AuthStore {
-    fetchProfile: (userId: string) => Promise<void>
-  }
-}

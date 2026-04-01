@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge'
 import { useProduct } from '@/api/products'
 import { useWishlistStore } from '@/store/wishlist'
 import { useAuthStore } from '@/store/auth'
-import { trackAffiliateClick, trackSelectItem } from '@/lib/analytics'
+import { trackAffiliateClick } from '@/lib/analytics'
 import { formatPrice, discountPercent, cloudinaryUrl, cn } from '@/lib/utils'
 import { useState } from 'react'
 

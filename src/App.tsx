@@ -15,6 +15,7 @@ import { BrandsDirectoryPage } from '@/pages/BrandsDirectory'
 import { WishlistPage } from '@/pages/Wishlist'
 import { SearchPage } from '@/pages/SearchPage'
 import { SignInPage } from '@/pages/auth/SignIn'
+import { AuthCallbackPage } from '@/pages/auth/Callback'
 import { AccountPage } from '@/pages/Account'
 import { PrivacyPage } from '@/pages/legal/Privacy'
 import { TermsPage } from '@/pages/legal/Terms'
@@ -69,6 +70,7 @@ export default function App() {
             <Route path="/wishlist" element={<WishlistPage />} />
             <Route path="/search" element={<SearchPage />} />
             <Route path="/auth/sign-in" element={<SignInPage />} />
+            <Route path="/auth/callback" element={<AuthCallbackPage />} />
             <Route path="/account" element={<AccountPage />} />
             <Route path="/legal/privacy" element={<PrivacyPage />} />
             <Route path="/legal/terms" element={<TermsPage />} />

@@ -1,5 +1,5 @@
 import { useParams, Link } from 'react-router-dom'
-import { ArrowRight } from 'lucide-react'
+
 import { useBrand } from '@/api/brands'
 import { useProducts } from '@/api/products'
 import { ProductGrid } from '@/components/product/ProductGrid'

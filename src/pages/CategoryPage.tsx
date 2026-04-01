@@ -1,6 +1,6 @@
 import { useParams, Link } from 'react-router-dom'
 import { useState } from 'react'
-import { SlidersHorizontal, X } from 'lucide-react'
+import { SlidersHorizontal } from 'lucide-react'
 import { useProducts } from '@/api/products'
 import { ProductGrid } from '@/components/product/ProductGrid'
 import { Button } from '@/components/ui/button'

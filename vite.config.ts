@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
-import tsconfigPaths from 'vite-tsconfig-paths'
 import { sentryVitePlugin } from '@sentry/vite-plugin'
 import path from 'path'
 
@@ -9,7 +8,6 @@ export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
-    tsconfigPaths(),
     sentryVitePlugin({
       org: process.env.SENTRY_ORG,
       project: process.env.SENTRY_PROJECT,
@@ -21,22 +19,17 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, './src'),
     },
+    tsconfigPaths: true,
   },
   build: {
     sourcemap: true,
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom', 'react-router-dom'],
-          query: ['@tanstack/react-query'],
-          supabase: ['@supabase/supabase-js'],
-          radix: [
-            '@radix-ui/react-dialog',
-            '@radix-ui/react-dropdown-menu',
-            '@radix-ui/react-select',
-            '@radix-ui/react-tabs',
-            '@radix-ui/react-accordion',
-          ],
+        manualChunks: (id) => {
+          if (id.includes('node_modules/react') || id.includes('node_modules/react-dom') || id.includes('node_modules/react-router-dom')) return 'vendor'
+          if (id.includes('@tanstack/react-query')) return 'query'
+          if (id.includes('@supabase/supabase-js')) return 'supabase'
+          if (id.includes('@radix-ui')) return 'radix'
         },
       },
     },
