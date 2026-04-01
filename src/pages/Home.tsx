@@ -4,6 +4,15 @@ import { Button } from '@/components/ui/button'
 import { ProductCard } from '@/components/product/ProductCard'
 import { useFeaturedProducts, useTrendingProducts, useNewArrivals } from '@/api/products'
 import { useFeaturedBrands } from '@/api/brands'
+import { useState, useEffect } from 'react'
+
+const HERO_SLIDES = [
+  'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1600&h=900&fit=crop&q=85', // women fashion
+  'https://images.unsplash.com/photo-1617137968427-85924c800a22?w=1600&h=900&fit=crop&q=85', // men suit
+  'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=1600&h=900&fit=crop&q=85', // luxury bags
+  'https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=1600&h=900&fit=crop&q=85', // luxury shoes
+  'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1600&h=900&fit=crop&q=85', // fashion store
+]
 
 const HERO_CATEGORIES = [
   {
@@ -38,17 +47,66 @@ export function HomePage() {
 
   const marqueeNames = brands?.length ? brands.map(b => b.name) : BRAND_NAMES
 
+  const [activeSlide, setActiveSlide] = useState(0)
+  const [prevSlide, setPrevSlide] = useState<number | null>(null)
+  const [transitioning, setTransitioning] = useState(false)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTransitioning(true)
+      setPrevSlide(activeSlide)
+      setActiveSlide(i => (i + 1) % HERO_SLIDES.length)
+      setTimeout(() => {
+        setPrevSlide(null)
+        setTransitioning(false)
+      }, 1200)
+    }, 5000)
+    return () => clearInterval(interval)
+  }, [activeSlide])
+
   return (
     <main className="pt-[calc(2.5rem+4rem)]">
 
       {/* ── Hero ──────────────────────────────────────────────── */}
       <section className="relative h-[85vh] min-h-[600px] flex items-end overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0a1f0a] via-[#1a3d1a] to-[#0f2d1a]" />
-        <div className="absolute inset-0 opacity-25"
-          style={{ background: 'radial-gradient(ellipse 80% 60% at 60% 40%, #d4952a33 0%, transparent 70%)' }} />
-        <div className="absolute inset-0 opacity-5"
-          style={{ backgroundImage: 'linear-gradient(#d4952a 1px, transparent 1px), linear-gradient(90deg, #d4952a 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
+        {/* Slideshow — outgoing image fades out, incoming fades in */}
+        {prevSlide !== null && (
+          <img
+            key={`prev-${prevSlide}`}
+            src={HERO_SLIDES[prevSlide]}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ opacity: transitioning ? 0 : 1, transition: 'opacity 1.2s ease' }}
+          />
+        )}
+        <img
+          key={`active-${activeSlide}`}
+          src={HERO_SLIDES[activeSlide]}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ opacity: transitioning ? 1 : 1, transition: 'opacity 1.2s ease' }}
+        />
+        {/* Dark green tint overlay — keeps brand colour while showing the photo */}
+        <div className="absolute inset-0" style={{ background: 'rgba(10,31,10,0.55)' }} />
+        {/* Gold shimmer */}
+        <div className="absolute inset-0 opacity-20"
+          style={{ background: 'radial-gradient(ellipse 80% 60% at 60% 40%, #d4952a22 0%, transparent 70%)' }} />
+        {/* Bottom fade to section below */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a1f0a] via-transparent to-transparent" />
+        {/* Slide indicator dots */}
+        <div className="absolute bottom-6 right-6 flex gap-2 z-10">
+          {HERO_SLIDES.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => { setPrevSlide(activeSlide); setActiveSlide(i) }}
+              aria-label={`Slide ${i + 1}`}
+              className="w-1.5 h-1.5 rounded-full transition-all duration-300"
+              style={{ background: i === activeSlide ? '#d4952a' : 'rgba(240,235,224,0.35)', width: i === activeSlide ? '1.5rem' : '0.375rem' }}
+            />
+          ))}
+        </div>
 
         <div className="relative max-w-7xl mx-auto px-6 pb-20 w-full">
           <p className="text-xs font-body tracking-[0.35em] uppercase text-[#d4952a] mb-4">
