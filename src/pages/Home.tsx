@@ -40,7 +40,7 @@ const BRAND_NAMES = [
 ]
 
 export function HomePage() {
-  const { data: featured  } = useFeaturedProducts(8)
+  const { data: featured  } = useFeaturedProducts(10)
   const { data: trending  } = useTrendingProducts(12)
   const { data: newArrivals } = useNewArrivals(8)
   const { data: brands    } = useFeaturedBrands(6)
@@ -208,12 +208,12 @@ export function HomePage() {
             </Link>
           </div>
           {featured && featured.length > 0 ? (
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
               {featured.map(p => <ProductCard key={p.id} product={p} />)}
             </div>
           ) : (
             <>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
                 {Array.from({ length: 8 }).map((_, i) => (
                   <div key={i} className="aspect-[3/4] bg-[#f5f5f5] rounded-sm animate-pulse" />
                 ))}
@@ -239,7 +239,7 @@ export function HomePage() {
                 See All <ArrowRight className="h-3 w-3" />
               </Link>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
               {newArrivals.map(p => <ProductCard key={p.id} product={p} />)}
             </div>
           </div>
@@ -256,7 +256,7 @@ export function HomePage() {
                 <h2 className="font-display text-3xl md:text-4xl font-light text-[#111]">Trending Now</h2>
               </div>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
               {trending.slice(0, 8).map(p => <ProductCard key={p.id} product={p} />)}
             </div>
           </div>
