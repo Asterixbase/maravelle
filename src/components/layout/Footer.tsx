@@ -34,13 +34,17 @@ export function Footer() {
   return (
     <footer className="bg-[#06090c]">
       <div className="w-full px-8 md:px-14 lg:px-20 py-16">
-        {/* Top: logo + tagline */}
-        <div className="mb-12">
-          <Link to="/" className="font-display text-3xl font-light tracking-[0.15em] text-[#f0ebe0]">
+
+        {/* Brand centrepiece */}
+        <div className="text-center pb-12 mb-12 border-b border-white/5">
+          <Link
+            to="/"
+            className="font-display text-5xl md:text-6xl font-light tracking-[0.25em] text-[#f0ebe0] hover:text-[#d4952a] transition-colors"
+          >
             MARAVELLE
           </Link>
-          <p className="mt-2 text-sm text-[#9ca3af] font-body max-w-sm">
-            Curated luxury fashion, beauty and homeware from Britain's finest heritage brands.
+          <p className="mt-4 text-xs text-[#6b7280] font-body tracking-[0.2em] uppercase">
+            Curated luxury fashion, beauty &amp; homeware from Britain's finest heritage brands
           </p>
         </div>
 
