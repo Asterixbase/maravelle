@@ -49,8 +49,8 @@ export function ProductCard({ product, className }: ProductCardProps) {
   return (
     <article
       className={cn(
-        'group relative flex flex-col bg-[#0d1117] border border-white/5 rounded-sm overflow-hidden',
-        'transition-all duration-300 hover:border-[#d4952a]/20 hover:shadow-[0_8px_32px_rgba(0,0,0,0.5)]',
+        'group relative flex flex-col bg-[#1a0e06] border border-white/5 rounded-md overflow-hidden',
+        'transition-all duration-300 hover:border-[#f97316]/25 hover:shadow-[0_8px_32px_rgba(194,65,12,0.2)]',
         className
       )}
     >
@@ -76,8 +76,8 @@ export function ProductCard({ product, className }: ProductCardProps) {
           onClick={handleWishlist}
           aria-label={wishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
           className={cn(
-            'absolute top-3 right-3 h-9 w-9 rounded-full bg-[#06090c]/80 backdrop-blur-sm flex items-center justify-center',
-            'transition-all duration-200 hover:bg-[#06090c]',
+            'absolute top-3 right-3 h-9 w-9 rounded-full bg-[#0e0803]/80 backdrop-blur-sm flex items-center justify-center',
+            'transition-all duration-200 hover:bg-[#0e0803]',
             wishlisted ? 'text-[#d4952a]' : 'text-[#9ca3af] hover:text-[#d4952a]'
           )}
         >

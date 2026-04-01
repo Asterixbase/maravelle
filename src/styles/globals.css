@@ -51,7 +51,7 @@ html {
 }
 
 body {
-  background-color: var(--color-obsidian);
+  background-color: #0e0803;
   color: var(--color-cream);
   font-family: var(--font-body);
   font-size: 1rem;
