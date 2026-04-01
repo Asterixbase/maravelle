@@ -54,7 +54,7 @@ export function Header() {
         </div>
 
         {/* Main nav bar — three equal columns: left nav | brand | right nav + actions */}
-        <div className="max-w-7xl mx-auto px-8 h-16 grid grid-cols-[1fr_auto_1fr] items-center gap-2">
+        <div className="w-full px-8 md:px-14 lg:px-20 h-16 grid grid-cols-[1fr_auto_1fr] items-center gap-2">
 
           {/* Left nav links */}
           <nav className="hidden md:flex items-center gap-5 justify-end pr-8">

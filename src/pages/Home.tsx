@@ -108,7 +108,7 @@ export function HomePage() {
           ))}
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-8 pb-20 w-full">
+        <div className="relative w-full px-8 md:px-14 lg:px-20 pb-20 w-full">
           <p className="text-xs font-body tracking-[0.35em] uppercase text-[#d4952a] mb-4">
             New Season · Spring 2025
           </p>
@@ -132,7 +132,7 @@ export function HomePage() {
 
       {/* ── Category tiles ────────────────────────────────────── */}
       <section className="bg-[#06090c] py-12">
-        <div className="max-w-7xl mx-auto px-8">
+        <div className="w-full px-8 md:px-14 lg:px-20">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {HERO_CATEGORIES.map(({ label, to, accent, image }) => (
               <Link key={to} to={to} className="group relative aspect-square overflow-hidden rounded-sm">
@@ -197,7 +197,7 @@ export function HomePage() {
 
       {/* ── Editor's Picks ── white ────────────────────────────── */}
       <section className="bg-white py-16">
-        <div className="max-w-7xl mx-auto px-8">
+        <div className="w-full px-8 md:px-14 lg:px-20">
           <div className="flex items-end justify-between mb-10 pb-4 border-b border-[#e8e8e8]">
             <div>
               <p className="text-[10px] font-body tracking-[0.35em] uppercase text-[#d4952a] mb-1">Handpicked</p>
@@ -229,7 +229,7 @@ export function HomePage() {
       {/* ── New Arrivals ── off-white ─────────────────────────── */}
       {newArrivals && newArrivals.length > 0 && (
         <section className="bg-[#f8f7f5] py-16 border-t border-[#ebebeb]">
-          <div className="max-w-7xl mx-auto px-8">
+          <div className="w-full px-8 md:px-14 lg:px-20">
             <div className="flex items-end justify-between mb-10 pb-4 border-b border-[#e8e8e8]">
               <div>
                 <p className="text-[10px] font-body tracking-[0.35em] uppercase text-[#d4952a] mb-1">Just Landed</p>
@@ -249,7 +249,7 @@ export function HomePage() {
       {/* ── Trending ── white ──────────────────────────────────── */}
       {trending && trending.length > 0 && (
         <section className="bg-white py-16 border-t border-[#ebebeb]">
-          <div className="max-w-7xl mx-auto px-8">
+          <div className="w-full px-8 md:px-14 lg:px-20">
             <div className="flex items-end justify-between mb-10 pb-4 border-b border-[#e8e8e8]">
               <div>
                 <p className="text-[10px] font-body tracking-[0.35em] uppercase text-[#d4952a] mb-1">Most Wanted</p>
@@ -271,7 +271,7 @@ export function HomePage() {
         {/* Bottom fade — dissolves into footer so no hard edge */}
         <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
           style={{ background: 'linear-gradient(to bottom, transparent, #06090c)' }} />
-        <div className="relative max-w-3xl mx-auto px-6 text-center">
+        <div className="relative w-full px-8 md:px-14 lg:px-20 text-center">
           <p className="text-[10px] font-body tracking-[0.35em] uppercase text-[#d4952a] mb-4">Our Philosophy</p>
           <h2 className="font-display text-4xl md:text-5xl font-light text-[#f0ebe0] mb-6 leading-tight">
             Quality over quantity.<br />Always.

@@ -33,7 +33,7 @@ const LINKS = {
 export function Footer() {
   return (
     <footer className="bg-[#06090c]">
-      <div className="max-w-7xl mx-auto px-8 py-16">
+      <div className="w-full px-8 md:px-14 lg:px-20 py-16">
         {/* Top: logo + tagline */}
         <div className="mb-12">
           <Link to="/" className="font-display text-3xl font-light tracking-[0.15em] text-[#f0ebe0]">
