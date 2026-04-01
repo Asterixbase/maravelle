@@ -181,14 +181,14 @@ export function HomePage() {
               <span key={`${name}-${i}`} className="flex-shrink-0 flex items-center">
                 <Link
                   to={`/brands/${name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
-                  className="opacity-40 hover:opacity-100 transition-opacity duration-300 px-8 md:px-12"
+                  className="opacity-40 hover:opacity-100 transition-opacity duration-300"
                 >
                   <span className="font-display text-2xl md:text-3xl text-[#f0ebe0] tracking-[0.2em] uppercase whitespace-nowrap">
                     {name}
                   </span>
                 </Link>
-                {/* Pipe separator */}
-                <span className="text-[#d4952a]/30 text-xl select-none" aria-hidden="true">|</span>
+                {/* Pipe — equal padding on both sides keeps spacing symmetric */}
+                <span className="px-10 text-[#d4952a]/40 text-lg select-none" aria-hidden="true">|</span>
               </span>
             ))}
           </div>
