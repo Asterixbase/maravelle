@@ -31,12 +31,12 @@ export function HomePage() {
 
       {/* ── Hero ──────────────────────────────────────────────── */}
       <section className="relative h-[85vh] min-h-[600px] flex items-end overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#06090c] via-[#0d1a0d] to-[#1a1200]" />
-        <div className="absolute inset-0 opacity-20"
-          style={{ background: 'radial-gradient(ellipse 80% 60% at 60% 40%, #d4952a22 0%, transparent 70%)' }} />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0a1f0a] via-[#1a3d1a] to-[#0f2d1a]" />
+        <div className="absolute inset-0 opacity-25"
+          style={{ background: 'radial-gradient(ellipse 80% 60% at 60% 40%, #d4952a33 0%, transparent 70%)' }} />
         <div className="absolute inset-0 opacity-5"
           style={{ backgroundImage: 'linear-gradient(#d4952a 1px, transparent 1px), linear-gradient(90deg, #d4952a 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#06090c] via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0a1f0a] via-transparent to-transparent" />
 
         <div className="relative max-w-7xl mx-auto px-6 pb-20 w-full">
           <p className="text-xs font-body tracking-[0.35em] uppercase text-[#d4952a] mb-4">
