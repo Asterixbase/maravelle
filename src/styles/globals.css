@@ -48,6 +48,8 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scrollbar-gutter: stable; /* reserves scrollbar space so mx-auto stays centred */
+  overflow-x: hidden;
 }
 
 body {

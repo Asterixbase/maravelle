@@ -41,8 +41,8 @@ const BRAND_NAMES = [
 
 export function HomePage() {
   const { data: featured  } = useFeaturedProducts(10)
-  const { data: trending  } = useTrendingProducts(12)
-  const { data: newArrivals } = useNewArrivals(8)
+  const { data: trending  } = useTrendingProducts(10)
+  const { data: newArrivals } = useNewArrivals(10)
   const { data: brands    } = useFeaturedBrands(6)
 
   const marqueeNames = brands?.length ? brands.map(b => b.name) : BRAND_NAMES
@@ -164,12 +164,12 @@ export function HomePage() {
         <p className="text-[10px] font-body tracking-[0.4em] uppercase text-[#6b7280] text-center mb-7">
           As featured from
         </p>
-        <div className="relative mx-8 md:mx-16">
-          {/* Wider fade on both sides so names never clip at edge */}
-          <div className="absolute left-0 top-0 bottom-0 w-32 z-10 pointer-events-none"
-            style={{ background: 'linear-gradient(to right, #06090c 40%, transparent)' }} />
-          <div className="absolute right-0 top-0 bottom-0 w-32 z-10 pointer-events-none"
-            style={{ background: 'linear-gradient(to left, #06090c 40%, transparent)' }} />
+        <div className="relative">
+          {/* Fade edges — same width on both sides */}
+          <div className="absolute left-0 top-0 bottom-0 w-28 z-10 pointer-events-none"
+            style={{ background: 'linear-gradient(to right, #06090c 50%, transparent)' }} />
+          <div className="absolute right-0 top-0 bottom-0 w-28 z-10 pointer-events-none"
+            style={{ background: 'linear-gradient(to left, #06090c 50%, transparent)' }} />
 
           <div
             className="flex items-center"
@@ -257,7 +257,7 @@ export function HomePage() {
               </div>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-              {trending.slice(0, 8).map(p => <ProductCard key={p.id} product={p} />)}
+              {trending.slice(0, 10).map(p => <ProductCard key={p.id} product={p} />)}
             </div>
           </div>
         </section>
