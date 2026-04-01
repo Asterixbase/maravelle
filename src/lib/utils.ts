@@ -37,12 +37,15 @@ export function truncate(str: string, n: number): string {
   return str.length > n ? str.slice(0, n - 1) + '…' : str
 }
 
-/** Get Cloudinary optimised URL */
+/** Get Cloudinary optimised URL — passes full URLs (e.g. Unsplash) straight through */
 export function cloudinaryUrl(
   publicId: string,
   opts: { width?: number; height?: number; quality?: number; format?: string } = {}
 ): string {
+  if (!publicId) return ''
+  if (publicId.startsWith('http://') || publicId.startsWith('https://')) return publicId
   const base = import.meta.env.VITE_CLOUDINARY_BASE_URL
+  if (!base || base.includes('placeholder')) return publicId
   const { width = 800, height, quality = 'auto', format = 'webp' } = opts
   const transforms = [
     `f_${format}`,

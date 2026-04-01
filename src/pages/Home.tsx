@@ -32,7 +32,11 @@ const HERO_CATEGORIES = [
   },
 ]
 
-const BRAND_NAMES = ['John Lewis', 'Marks & Spencer', 'Harrods', 'Fenwick']
+const BRAND_NAMES = [
+  'John Lewis', 'Harrods', 'Burberry', 'Ralph Lauren',
+  'Marks & Spencer', 'Ted Baker', 'Reiss', 'Fenwick',
+  'Mulberry', 'AllSaints', 'Paul Smith', 'Hugo Boss',
+]
 
 export function HomePage() {
   const { data: featured } = useFeaturedProducts(8)
