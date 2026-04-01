@@ -117,7 +117,10 @@ export function HomePage() {
             style={{ background: 'linear-gradient(to left, #06090c, transparent)' }} />
 
           {/* Scrolling track — duplicated for seamless loop */}
-          <div className="flex items-center" style={{ animation: 'marquee 30s linear infinite' }}>
+          <div className="flex items-center group/marquee" style={{ animation: 'marquee 30s linear infinite' }}
+            onMouseEnter={e => (e.currentTarget.style.animationPlayState = 'paused')}
+            onMouseLeave={e => (e.currentTarget.style.animationPlayState = 'running')}
+          >
             {[...(brands?.length ? brands.map(b => b.name) : BRAND_NAMES), ...(brands?.length ? brands.map(b => b.name) : BRAND_NAMES)].map((name, i) => (
               <Link
                 key={`${name}-${i}`}
