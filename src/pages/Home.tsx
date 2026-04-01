@@ -160,31 +160,36 @@ export function HomePage() {
       </section>
 
       {/* ── Brand marquee ─────────────────────────────────────── */}
-      <section className="bg-[#06090c] border-y border-white/5 py-8 overflow-hidden">
-        <p className="text-xs font-body tracking-[0.35em] uppercase text-[#6b7280] text-center mb-6">
+      <section className="bg-[#06090c] border-y border-white/5 py-10 overflow-hidden">
+        <p className="text-[10px] font-body tracking-[0.4em] uppercase text-[#6b7280] text-center mb-7">
           As featured from
         </p>
-        <div className="relative">
-          <div className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
-            style={{ background: 'linear-gradient(to right, #06090c, transparent)' }} />
-          <div className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
-            style={{ background: 'linear-gradient(to left, #06090c, transparent)' }} />
+        <div className="relative mx-8 md:mx-16">
+          {/* Wider fade on both sides so names never clip at edge */}
+          <div className="absolute left-0 top-0 bottom-0 w-32 z-10 pointer-events-none"
+            style={{ background: 'linear-gradient(to right, #06090c 40%, transparent)' }} />
+          <div className="absolute right-0 top-0 bottom-0 w-32 z-10 pointer-events-none"
+            style={{ background: 'linear-gradient(to left, #06090c 40%, transparent)' }} />
+
           <div
             className="flex items-center"
-            style={{ animation: 'marquee 30s linear infinite' }}
+            style={{ animation: 'marquee 36s linear infinite' }}
             onMouseEnter={e => (e.currentTarget.style.animationPlayState = 'paused')}
             onMouseLeave={e => (e.currentTarget.style.animationPlayState = 'running')}
           >
             {[...marqueeNames, ...marqueeNames].map((name, i) => (
-              <Link
-                key={`${name}-${i}`}
-                to={`/brands/${name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
-                className="flex-shrink-0 opacity-30 hover:opacity-100 transition-opacity duration-300 mx-10 md:mx-16"
-              >
-                <span className="font-display text-xl md:text-2xl text-[#f0ebe0] tracking-widest whitespace-nowrap">
-                  {name}
-                </span>
-              </Link>
+              <span key={`${name}-${i}`} className="flex-shrink-0 flex items-center">
+                <Link
+                  to={`/brands/${name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
+                  className="opacity-40 hover:opacity-100 transition-opacity duration-300 px-8 md:px-12"
+                >
+                  <span className="font-display text-2xl md:text-3xl text-[#f0ebe0] tracking-[0.2em] uppercase whitespace-nowrap">
+                    {name}
+                  </span>
+                </Link>
+                {/* Pipe separator */}
+                <span className="text-[#d4952a]/30 text-xl select-none" aria-hidden="true">|</span>
+              </span>
             ))}
           </div>
         </div>
