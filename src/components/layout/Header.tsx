@@ -5,19 +5,21 @@ import { cn } from '@/lib/utils'
 import { useAuthStore } from '@/store/auth'
 import { useWishlistStore } from '@/store/wishlist'
 
-const NAV_LEFT  = [
+interface NavItem { label: string; to: string; className?: string }
+
+const NAV_LEFT: NavItem[]  = [
   { label: 'New In',  to: '/new-in' },
   { label: 'Women',   to: '/women' },
   { label: 'Men',     to: '/men' },
 ]
 
-const NAV_RIGHT = [
+const NAV_RIGHT: NavItem[] = [
   { label: 'Beauty',  to: '/beauty' },
   { label: 'Brands',  to: '/brands' },
   { label: 'Sale',    to: '/sale', className: 'text-[#d4952a]' },
 ]
 
-const ALL_NAV = [...NAV_LEFT, ...NAV_RIGHT]
+const ALL_NAV: NavItem[] = [...NAV_LEFT, ...NAV_RIGHT]
 
 export function Header() {
   const [searchOpen, setSearchOpen] = useState(false)
