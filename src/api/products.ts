@@ -1,5 +1,6 @@
 import { useQuery, useInfiniteQuery } from '@tanstack/react-query'
 import { supabase } from '@/lib/supabase'
+import { toCamel } from '@/lib/utils'
 import type { Product, SearchFilters, PaginatedResponse } from '@/types'
 
 const PAGE_SIZE = 24
@@ -33,7 +34,7 @@ async function fetchProducts(
   if (error) throw error
 
   return {
-    data: (data ?? []) as Product[],
+    data: toCamel<Product[]>(data ?? []),
     total: count ?? 0,
     page,
     pageSize: PAGE_SIZE,
@@ -61,7 +62,7 @@ export function useProduct(slug: string) {
         .eq('slug', slug)
         .single()
       if (error) throw error
-      return data as Product
+      return toCamel<Product>(data)
     },
     staleTime: 1000 * 60 * 10,
     enabled: !!slug,
@@ -80,7 +81,7 @@ export function useFeaturedProducts(limit = 8) {
         .order('created_at', { ascending: false })
         .limit(limit)
       if (error) throw error
-      return (data ?? []) as Product[]
+      return toCamel<Product[]>(data ?? [])
     },
     staleTime: 1000 * 60 * 10,
   })
@@ -98,7 +99,7 @@ export function useTrendingProducts(limit = 12) {
         .order('click_count', { ascending: false })
         .limit(limit)
       if (error) throw error
-      return (data ?? []) as Product[]
+      return toCamel<Product[]>(data ?? [])
     },
     staleTime: 1000 * 60 * 5,
   })
@@ -116,7 +117,7 @@ export function useNewArrivals(limit = 12) {
         .order('created_at', { ascending: false })
         .limit(limit)
       if (error) throw error
-      return (data ?? []) as Product[]
+      return toCamel<Product[]>(data ?? [])
     },
     staleTime: 1000 * 60 * 5,
   })

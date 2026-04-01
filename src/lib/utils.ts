@@ -60,6 +60,21 @@ export function cloudinaryUrl(
   return `${base}/${transforms}/${publicId}`
 }
 
+/** Convert snake_case keys to camelCase (shallow or deep) */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function toCamel<T>(obj: any): T {
+  if (Array.isArray(obj)) return obj.map(toCamel) as unknown as T
+  if (obj !== null && typeof obj === 'object') {
+    return Object.fromEntries(
+      Object.entries(obj).map(([k, v]) => [
+        k.replace(/_([a-z])/g, (_, c) => c.toUpperCase()),
+        toCamel(v),
+      ])
+    ) as T
+  }
+  return obj as T
+}
+
 /** Debounce */
 export function debounce<T extends (...args: unknown[]) => void>(fn: T, ms: number) {
   let timer: ReturnType<typeof setTimeout>

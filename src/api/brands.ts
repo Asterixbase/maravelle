@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { supabase } from '@/lib/supabase'
+import { toCamel } from '@/lib/utils'
 import type { Brand } from '@/types'
 
 export function useBrands() {
@@ -12,7 +13,7 @@ export function useBrands() {
         .eq('is_active', true)
         .order('featured_rank', { ascending: true, nullsFirst: false })
       if (error) throw error
-      return (data ?? []) as Brand[]
+      return toCamel<Brand[]>(data ?? [])
     },
     staleTime: 1000 * 60 * 30,
   })
@@ -28,7 +29,7 @@ export function useBrand(slug: string) {
         .eq('slug', slug)
         .single()
       if (error) throw error
-      return data as Brand
+      return toCamel<Brand>(data)
     },
     staleTime: 1000 * 60 * 30,
     enabled: !!slug,
@@ -47,7 +48,7 @@ export function useFeaturedBrands(limit = 6) {
         .order('featured_rank', { ascending: true })
         .limit(limit)
       if (error) throw error
-      return (data ?? []) as Brand[]
+      return toCamel<Brand[]>(data ?? [])
     },
     staleTime: 1000 * 60 * 30,
   })
