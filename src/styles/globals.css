@@ -1,0 +1,125 @@
+@import "tailwindcss";
+
+@theme {
+  /* Maravelle colour palette */
+  --color-obsidian: #06090c;
+  --color-obsidian-light: #0d1117;
+  --color-obsidian-mid: #161b22;
+  --color-gold: #d4952a;
+  --color-gold-light: #e8b84b;
+  --color-gold-muted: #8a6118;
+  --color-forest: #1a4d33;
+  --color-forest-light: #2d6b4a;
+  --color-cream: #f0ebe0;
+  --color-cream-dark: #e0d8c8;
+  --color-smoke: #9ca3af;
+  --color-ash: #6b7280;
+
+  /* Typography */
+  --font-display: "Cormorant Garamond", "Georgia", serif;
+  --font-body: "Montserrat", "Helvetica Neue", sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+
+  /* Spacing scale */
+  --spacing-section: 5rem;
+  --spacing-gutter: 1.5rem;
+
+  /* Border radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --shadow-glow: 0 0 20px rgba(212, 149, 42, 0.15);
+  --shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Base reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--color-obsidian);
+  color: var(--color-cream);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  min-height: 100dvh;
+}
+
+/* Google Fonts preconnect (added in index.html) */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+
+/* Gold accent on links */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-obsidian-light);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-ash);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gold-muted);
+}
+
+/* Focus ring */
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* Image optimization defaults */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Utility: gold gradient text */
+.text-gold-gradient {
+  background: linear-gradient(135deg, var(--color-gold), var(--color-gold-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Utility: subtle top border accent */
+.border-gold-top {
+  border-top: 1px solid var(--color-gold-muted);
+}
+
+/* Utility: glass card effect */
+.glass-card {
+  background: rgba(13, 17, 23, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(212, 149, 42, 0.12);
+  box-shadow: var(--shadow-card);
+}

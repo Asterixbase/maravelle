@@ -1,0 +1,21 @@
+{
+  "name": "Maravelle",
+  "short_name": "Maravelle",
+  "description": "Curated luxury fashion, beauty and homeware from Britain's finest brands.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#06090c",
+  "theme_color": "#06090c",
+  "icons": [
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

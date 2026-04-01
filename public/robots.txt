@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /r/
+Disallow: /auth/
+Disallow: /account
+Disallow: /api/
+
+Sitemap: https://www.maravelle.co.uk/sitemap.xml
