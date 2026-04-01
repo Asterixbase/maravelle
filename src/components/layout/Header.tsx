@@ -54,10 +54,10 @@ export function Header() {
         </div>
 
         {/* Main nav bar — three equal columns: left nav | brand | right nav + actions */}
-        <div className="max-w-7xl mx-auto px-6 h-16 grid grid-cols-[1fr_auto_1fr] items-center gap-4">
+        <div className="max-w-7xl mx-auto px-8 h-16 grid grid-cols-[1fr_auto_1fr] items-center gap-2">
 
           {/* Left nav links */}
-          <nav className="hidden md:flex items-center gap-7 justify-start">
+          <nav className="hidden md:flex items-center gap-5 justify-end pr-8">
             {NAV_LEFT.map(({ label, to }) => (
               <NavLink key={to} to={to} className={({ isActive }) => navLinkClass(isActive)}>
                 {label}
@@ -74,14 +74,14 @@ export function Header() {
           </Link>
 
           {/* Right nav links + actions */}
-          <div className="hidden md:flex items-center gap-7 justify-end">
+          <div className="hidden md:flex items-center gap-5 justify-start pl-8">
             {NAV_RIGHT.map(({ label, to, className }) => (
               <NavLink key={to} to={to} className={({ isActive }) => navLinkClass(isActive, className)}>
                 {label}
               </NavLink>
             ))}
 
-            <div className="flex items-center gap-4 ml-2 pl-4 border-l border-white/10">
+            <div className="flex items-center gap-4 ml-auto pl-4 border-l border-white/10">
               <button onClick={() => setSearchOpen(true)} aria-label="Search"
                 className="text-[#9ca3af] hover:text-[#d4952a] transition-colors">
                 <Search className="h-4 w-4" />
